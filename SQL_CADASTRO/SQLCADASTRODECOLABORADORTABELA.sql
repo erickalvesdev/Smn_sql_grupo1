@@ -50,10 +50,17 @@ ARQUIVO FONTE.....: SJOIN_CLIENTE.SQL
 OBJETIVO..........: FAZER A JUNÇÃO DAS TABELAS CADASTRO DO CLIENTE E CONTATO
 AUTOR.............: SMN - ERICK ALVES
 DATA..............: 11/12/2023
+<<<<<<< HEAD
 EX................: EXEC [dbo].[JOIN_CLIENTE] @Empresa, @Nome, @Email, @Cargo, @Cidade, @DDD, @Numero, @Whatsapp
 */
 	BEGIN
 		SELECT CC.EMPRESA, CC.NOME, CC.EMAIL, CC.CARGO, CC.CIDADE, C. 
+=======
+EX................: EXEC [dbo].[JOIN_CLIENTE] @Empresa, @Nome, @Email, @Cargo, @Cidade, @DDD, @Numero, @Whatsapp.
+*/
+	BEGIN
+		SELECT CC.EMPRESA, CC.NOME, CC.EMAIL, CC.CARGO, CC.CIDADE, C.DDD, C.Numero, C.Whatsapp
+>>>>>>> Erick
 		FROM Cadastro_Colaborador CC
 		INNER JOIN Contato C 
 		ON CC.Id_C = C.Id_C
