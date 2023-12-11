@@ -1,13 +1,14 @@
 
 CREATE PROC [dbo].[JOIN_CLIENTE](
-	              @empresa, 
-				  @nome, 
-				  @email, 
-				  @cargo, 
-				  @Cidade,
-				  @DDD,
-                  @Numero,
-				  @Whatsapp
+                  @Id_CC INT,
+	              @empresa VARCHAR(50), 
+				  @nome VARCHAR(255), 
+				  @email VARCHAR(300), 
+				  @cargo VARCHAR(50), 
+				  @Cidade VARCHAR(50),
+				  @DDD TINYINT,
+                  @Numero BIGINT,
+				  @Whatsapp BIT
 				  )
 
 AS
@@ -24,7 +25,8 @@ EX................: EXEC [dbo].[JOIN_CLIENTE] @Empresa, @Nome, @Email, @Cargo, @
 		FROM Cadastro_Colaborador CC
 		INNER JOIN Contato C 
 		ON CC.Id_C = C.Id_C
-		WHERE (@empresa IS NULL OR CC.Empresa = @Empresa) AND
+		WHERE (@Id_CC IS NULL OR CC.Id_CC = @Id_CC) AND
+              (@empresa IS NULL OR CC.Empresa = @Empresa) AND
 		      (@Nome IS NULL OR CC.Nome = @Nome) AND
 			  (@Email IS NULL OR CC.Email = @Email) AND
 			  (@Cargo IS NULL OR CC.Cargo = @Cargo) AND
