@@ -32,16 +32,16 @@ CREATE table  Contato (
 	)
 
 
-<<<<<<< HEAD
 CREATE PROC [dbo].[JOIN_CLIENTE](
-	              @empresa, 
-				  @nome, 
-				  @email, 
-				  @cargo, 
-				  @Cidade,
-				  @DDD,
-                  @Numero,
-				  @Whatsapp
+                  @Id_CC INT,
+	              @empresa VARCHAR(50), 
+				  @nome VARCHAR(255), 
+				  @email VARCHAR(300), 
+				  @cargo VARCHAR(50), 
+				  @Cidade VARCHAR(50),
+				  @DDD TINYINT,
+                  @Numero BIGINT,
+				  @Whatsapp BIT
 				  )
 
 AS
@@ -51,21 +51,15 @@ ARQUIVO FONTE.....: SJOIN_CLIENTE.SQL
 OBJETIVO..........: FAZER A JUNÇÃO DAS TABELAS CADASTRO DO CLIENTE E CONTATO
 AUTOR.............: SMN - ERICK ALVES
 DATA..............: 11/12/2023
-<<<<<<< HEAD
-EX................: EXEC [dbo].[JOIN_CLIENTE] @Empresa, @Nome, @Email, @Cargo, @Cidade, @DDD, @Numero, @Whatsapp
-*/
-	BEGIN
-		SELECT CC.EMPRESA, CC.NOME, CC.EMAIL, CC.CARGO, CC.CIDADE, C. 
-=======
 EX................: EXEC [dbo].[JOIN_CLIENTE] @Empresa, @Nome, @Email, @Cargo, @Cidade, @DDD, @Numero, @Whatsapp.
 */
 	BEGIN
 		SELECT CC.EMPRESA, CC.NOME, CC.EMAIL, CC.CARGO, CC.CIDADE, C.DDD, C.Numero, C.Whatsapp
->>>>>>> Erick
 		FROM Cadastro_Colaborador CC
 		INNER JOIN Contato C 
 		ON CC.Id_C = C.Id_C
-		WHERE (@empresa IS NULL OR CC.Empresa = @Empresa) AND
+		WHERE (@Id_CC IS NULL OR CC.Id_CC = @Id_CC) AND
+              (@empresa IS NULL OR CC.Empresa = @Empresa) AND
 		      (@Nome IS NULL OR CC.Nome = @Nome) AND
 			  (@Email IS NULL OR CC.Email = @Email) AND
 			  (@Cargo IS NULL OR CC.Cargo = @Cargo) AND
@@ -78,7 +72,6 @@ EX................: EXEC [dbo].[JOIN_CLIENTE] @Empresa, @Nome, @Email, @Cargo, @
 GO
 
 EXEC [dbo].[JOIN_CLIENTE] @Empresa, @Nome, @Email, @Cargo, @Cidade, @DDD, @Numero, @Whatsapp
-=======
 
 -------------------------------------------------------------------
 -- insert colaborador
@@ -179,7 +172,6 @@ exec [dbo].[sp_inscontato] 2,2,83,991836596,1
 exec [dbo].[sp_inscontato] 3,3,83,998015325,1
 exec [dbo].[sp_inscontato] 4,4,83,982090355,1
 exec [dbo].[sp_inscontato] 5,5,83,993426874,1
->>>>>>> 4a22a2c6e7880ec712e90cceb6a00a59fa751a05
 
 --Procedure Inner Join --
 
