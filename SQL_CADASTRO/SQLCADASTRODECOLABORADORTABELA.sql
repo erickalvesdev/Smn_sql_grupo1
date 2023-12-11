@@ -30,3 +30,45 @@ CREATE table  Contato (
 	FOREIGN KEY (Id_CC) REFERENCES Cadastro_Colaborador (Id_CC),
 	FOREIGN KEY (Id_Tipo) REFERENCES Tipo_Contato (Id_Tipo)
 	)
+
+
+CREATE PROC [dbo].[JOIN_CLIENTE](
+	              @empresa, 
+				  @nome, 
+				  @email, 
+				  @cargo, 
+				  @Cidade,
+				  @DDD,
+                  @Numero,
+				  @Whatsapp
+				  )
+
+AS
+/*
+DOCUMENTAÇÃO
+ARQUIVO FONTE.....: SJOIN_CLIENTE.SQL
+OBJETIVO..........: FAZER A JUNÇÃO DAS TABELAS CADASTRO DO CLIENTE E CONTATO
+AUTOR.............: SMN - ERICK ALVES
+DATA..............: 11/12/2023
+EX................: DECLARE @RESULTADO INT
+					EXEC [dbo].[JOIN_CLIENTE] 15,6, @RESULTADO OUTPUT
+					SELECT @RESULTADO AS RESULTADO
+*/
+	BEGIN
+		SELECT CC.EMPRESA, CC.NOME, CC.EMAIL, CC.CARGO, CC.CIDADE, C. 
+		FROM Cadastro_Colaborador CC
+		INNER JOIN Contato C 
+		ON CC.Id_C = C.Id_C
+		WHERE (@empresa IS NULL OR CC.Empresa = @Empresa) AND
+		      (@Nome IS NULL OR CC.Nome = @Nome) AND
+			  (@Email IS NULL OR CC.Email = @Email) AND
+			  (@Cargo IS NULL OR CC.Cargo = @Cargo) AND
+			  (@Cidade IS NULL OR CC.Cidade = @Cidade) AND
+			  (@DDD IS NULL OR CC.DDD = @DDD) AND
+			  (@Numero IS NULL OR CC.Numero = @Numero) AND
+			  (@Whatsapp IS NULL OR CC.Whatsapp = @Whatsapp) 
+
+    END
+GO
+
+EXEC [dbo].[JOIN_CLIENTE] @Empresa, @Nome, @Email, @Cargo, @Cidade, @DDD, @Numero, @Whatsapp
