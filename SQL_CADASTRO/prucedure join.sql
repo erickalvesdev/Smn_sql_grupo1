@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 CREATE PROC [dbo].[JOIN_CLIENTE](
                   @Id_CC INT,
 	              @empresa VARCHAR(50), 
@@ -9,33 +10,55 @@ CREATE PROC [dbo].[JOIN_CLIENTE](
 				  @DDD TINYINT,
                   @Numero BIGINT,
 				  @Whatsapp BIT
+=======
+--Procedure Inner Join --
+
+CREATE PROC [dbo].[SP_Sel_Cliente](
+                  @Id_CC INT = NULL,
+				  @Id_Contato INT = NULL,
+	              @Empresa VARCHAR(50)= NULL,
+				  @Nome VARCHAR(255)= NULL,
+				  @Email VARCHAR(300)= NULL,
+				  @Cargo VARCHAR(50)= NULL,
+				  @Cidade VARCHAR(50)= NULL,
+				  @DDD TINYINT = NULL,
+                  @Numero BIGINT = NULL,
+				  @Whatsapp BIT = NULL
+>>>>>>> Erick
 				  )
 
 AS
 /*
 DOCUMENTAÇÃO
-ARQUIVO FONTE.....: SJOIN_CLIENTE.SQL
+ARQUIVO FONTE.....: SP_Sel_Cliente.SQL
 OBJETIVO..........: FAZER A JUNÇÃO DAS TABELAS CADASTRO DO CLIENTE E CONTATO
 AUTOR.............: SMN - ERICK ALVES
 DATA..............: 11/12/2023
-EX................: EXEC [dbo].[JOIN_CLIENTE] @Empresa, @Nome, @Email, @Cargo, @Cidade, @DDD, @Numero, @Whatsapp.
+EX................: EXEC [dbo].[SP_Sel_Cliente] NULL, NULL, 'smn', NULL,NULL, NULL,NULL,NULL, NULL, NULL
 */
 	BEGIN
-		SELECT CC.EMPRESA, CC.NOME, CC.EMAIL, CC.CARGO, CC.CIDADE, C.DDD, C.Numero, C.Whatsapp
+		SELECT CC.Id_CC,CC.EMPRESA, CC.NOME, CC.EMAIL, CC.CARGO, CC.CIDADE, Concat ('(',C.DDD, ')', ' ', C.Numero) AS CONTATO, C.Whatsapp
 		FROM Cadastro_Colaborador CC
+<<<<<<< HEAD
 		INNER JOIN Contato C 
 		ON CC.Id_C = C.Id_C
 		WHERE (@Id_CC IS NULL OR CC.Id_CC = @Id_CC) AND
+=======
+			INNER JOIN Contato C 
+		ON CC.Id_CC = C.Id_Contato
+		WHERE (@Id_CC IS NULL OR CC.Id_CC = @Id_CC) AND
+			  (@Id_Contato is null or C.Id_Contato =@Id_Contato) and
+>>>>>>> Erick
               (@empresa IS NULL OR CC.Empresa = @Empresa) AND
 		      (@Nome IS NULL OR CC.Nome = @Nome) AND
 			  (@Email IS NULL OR CC.Email = @Email) AND
 			  (@Cargo IS NULL OR CC.Cargo = @Cargo) AND
 			  (@Cidade IS NULL OR CC.Cidade = @Cidade) AND
-			  (@DDD IS NULL OR CC.DDD = @DDD) AND
-			  (@Numero IS NULL OR CC.Numero = @Numero) AND
-			  (@Whatsapp IS NULL OR CC.Whatsapp = @Whatsapp) 
+			  (@DDD IS NULL OR C.DDD = @DDD) AND
+			  (@Numero IS NULL OR C.Numero = @Numero) AND
+			  (@Whatsapp IS NULL OR C.Whatsapp = @Whatsapp)
 
     END
 GO
 
-EXEC [dbo].[JOIN_CLIENTE] @Empresa, @Nome, @Email, @Cargo, @Cidade, @DDD, @Numero, @Whatsapp
+EXEC [dbo].[SP_Sel_Cliente] NULL, NULL, 'smn', NULL,NULL, NULL,NULL, NULL
