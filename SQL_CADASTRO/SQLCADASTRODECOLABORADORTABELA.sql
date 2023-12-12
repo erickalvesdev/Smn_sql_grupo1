@@ -198,7 +198,7 @@ DATA..............: 11/12/2023
 EX................: EXEC [dbo].[SP_Sel_Cliente] NULL, NULL, 'smn', NULL,NULL, NULL,NULL,NULL, NULL, NULL
 */
 	BEGIN
-		SELECT CC.Id_CC,CC.EMPRESA, CC.NOME, CC.EMAIL, CC.CARGO, CC.CIDADE, Concat ('(',C.DDD, ')', ' ', C.Numero) AS CONTATO, C.Whatsapp
+		SELECT CC.Id_CC AS Identificação, CC.EMPRESA, CC.NOME, CC.EMAIL, Concat ('(',C.DDD, ')', ' ', C.Numero) AS Telefone, C.Whatsapp, CC.Cargo, CC.Cidade
 		FROM Cadastro_Colaborador CC
 			INNER JOIN Contato C 
 		ON CC.Id_CC = C.Id_Contato
