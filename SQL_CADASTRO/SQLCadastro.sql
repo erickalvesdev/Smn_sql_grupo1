@@ -1,4 +1,4 @@
-
+﻿CREATE DATABASE smningatreinamentogrupo1
 USE smningatreinamentogrupo1
 
 -- CRIANDO TABELA DE CADASTRO
